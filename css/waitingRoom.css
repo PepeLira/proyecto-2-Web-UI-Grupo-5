@@ -1,0 +1,14 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 1%;
+}
+.logo-name {
+  margin-inline: 1rem;
+}
+.title {
+  margin-inline: 1rem;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  padding-inline: 1rem;
+}
