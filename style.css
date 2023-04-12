@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --color-primary: #0087AA;
+  --color-secondary: #00AFB9;
+  --color-tertiary: #FFE7BD;
+  --color-accent: #F3A72E;
+  --color-highlight: #F28C4B;
+  --color-white: #FFFFFF;
+  --color-background: #FFFAF2;
+  --color-gray: #999999;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+.logo-name {
+  color: var(--color-primary);
+}
