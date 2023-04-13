@@ -10,7 +10,7 @@ header {
   margin-inline: 1rem;
 }
 .header-content { 
-  flex: 2;
+  flex: 1.9;
   display: flex;
   align-items: center;
 }
@@ -139,4 +139,33 @@ header {
   margin: 1rem;
   justify-content: center;
   width: 20%;
+}
+
+.third {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center; 
+  text-align: center;
+}
+
+.rounds-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-highlight);
+  margin-bottom: 0.5rem;
+}
+
+.rounds-selector {
+  max-width: 20%;
+  padding: 1rem;
+  text-align: center;
+  border: 3px solid var(--color-highlight);
+  border-radius: 10px;
+  /* font-size: 2rem; */
+}
+
+.first {
+  padding: 5%;
 }
