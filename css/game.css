@@ -336,3 +336,7 @@ textarea::placeholder {
 .perfect {
     background-color: var(--color-highlight);
 }
+
+.hiddeninterface {
+    display: none;
+}
