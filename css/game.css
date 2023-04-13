@@ -64,11 +64,12 @@ header {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: normal;
     align-content: center;
     width: 35%;
     padding: 10px;
+    margin-top: 1.5rem;
 }
   
 .flex-items:nth-child(3) {
@@ -116,7 +117,7 @@ header {
     align-items: center;
     align-content: center;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 2rem;
 }
 
 .h6 {
@@ -132,54 +133,38 @@ header {
     font-size: 13px;
 }
 
-.flex-items:nth-child(3) > span {
-    color: var(--color-secondary);
-    padding: 10px;
-    font-size: large;
-}
-
-.playerslist-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: normal;
-    border: 1px solid var(--color-primary);
-}
-
 .room-data {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
-  }
+}
   
-  .players-list-holder {
+.players-list-holder {
     border: 5px solid var(--color-secondary);
     height: 20rem;
     width: 30rem;
     border-radius: 20px;
-  }
+}
 
-  .room-players {
+.room-players {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--color-secondary);
     margin-bottom: 0.5rem;
-  }
+}
   
   
-  .players-list-holder {
+.players-list-holder {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
     align-content: stretch;
-  }
+}
   
-  .flex-row {
+.flex-row {
     display: block;
     flex-grow: 0;
     flex-shrink: 1;
@@ -188,20 +173,20 @@ header {
     order: 0;
     margin: 0.6rem;
     padding: 0.8rem;
-  }
+}
   
-  .pregunton {
+.pregunton {
     border: 3px solid var(--color-highlight);
     color: var(--color-highlight);
-  }
+}
   
-  .player {
+.player {
     border: 3px solid var(--color-secondary);
     color: var(--color-secondary);
-  }
+}
   
   
-  .player-tag {
+.player-tag {
     border-radius: 10px;
     font-size: 0.8rem;
     font-weight: 500;
@@ -209,15 +194,98 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
+}
   
-  .icon {
+.icon {
     height: 1rem;
     width: 1rem;
     margin-right: 0.5rem;
-  }
+}
   
-  .left {
+.left {
     display: flex;
     align-items: center;
-  }
+}
+
+.right {
+    font-size: 1rem;
+}
+
+.showrating-zone {
+    margin-top: 1rem;
+    text-align: end;
+}
+.showrating-zone > span {
+    margin-right: 1rem;
+}
+
+.answer-question {
+    color: var(--color-accent);
+    font-size: 1.5rem;
+}
+.answer-question > span {
+    color: var(--color-secondary);
+}
+
+.question-answer-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: start;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--color-tertiary);
+    height: 300px;
+    border-radius: 10px;
+    border: 3px solid var(--color-accent);
+}
+.question {
+    background-color: var(--color-highlight);
+    padding: 10px;
+    margin: 10px;
+    width: auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 15px;
+    color: var(--color-white);
+}
+
+.answer {
+    background-color: var(--color-secondary);
+    padding: 10px;
+    margin: 10px;
+    width: auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 15px;
+    color: var(--color-white);
+}
+
+.input-zone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center; 
+    margin: 20px;
+}
+
+#qtextarea {
+    width: 70%;
+    height: 100px;
+    padding: 12px;
+    border-radius: 1rem;
+    resize: vertical;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}
+
+#btnsendaq {
+    background-color: var(--color-highlight);
+    border: none;
+    color: var(--color-white);
+    border-radius: 1rem;
+    padding: 10px;
+    font-size: large;
+    height: fit-content;
+    width: 20%;
+}
