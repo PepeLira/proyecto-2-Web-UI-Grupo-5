@@ -1,224 +1,287 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/game.css">
-        <script src="js/game.js" defer></script>
-    </head>
-    <body>
-        <header>
-            <div class="logo-name h3">¿Preguntón?</div>
-            <div class="header-content">
-              <div class="title h6" id="Preparando">Preparando pregunta</div>
-              <div class="title h6" id="Respondiendo">Respondiendo</div>
-              <div class="title h6" id="Evaluando">Evaluando</div>
-              <div class="title h6" id="Revisando">Revisando</div>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/modalEndGame.css">
+    <script src="js/game.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo-name h3">¿Preguntón?</div>
+      <div class="header-content">
+        <div class="title h6" id="Preparando">Preparando pregunta</div>
+        <div class="title h6" id="Respondiendo">Respondiendo</div>
+        <div class="title h6" id="Evaluando">Evaluando</div>
+        <div class="title h6" id="Revisando">Revisando</div>
+      </div>
+    </header>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-title h4">Fin Del Juego</div>
+          <div class="room-data">
+            <div class="room-players">Puntajes</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <div>60</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <div>55</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <div>44</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <div>31</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                  <div>3</div>
+                </div>
+              </div>
             </div>
-        </header>
-        <div class="flex-container">
-            <div class="flex-items">
-                <span>Ronda: 6 / 10</span>
-                <div class="timer">
-                    <div>Tiempo Restante</div>
-                    <div class="displaytime">46s</div>
-                </div>
-                <div class="hint-container">
-                    <div class="hintone">
-                        <div class="hint-title h6">Hint 1:</div>
-                        <div class="hinttext">
-                            Nibh sed pulvinar proin gravida hendrerit lectus a. Nibh tortor id aliquet lectus proin nibh nisl condimentum id. Mus mauris vitae ultricies leo integer malesuada nunc vel risus. Enim nunc faucibus a pellentesque. Pretium lectus quam id leo in vitae turpis massa sed. Aenean et tortor at risus viverra adipiscing. Curabitur gravida arcu ac tortor dignissim convallis. Id nibh tortor id aliquet lectus. Enim nunc faucibus a pellentesque. Curabitur vitae nunc sed velit dignissim. Vitae justo eget magna fermentum iaculis. Dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu.
-                        </div>
-                    </div>
-                    <div class="hinttwo">
-                        <div class="hint-title h6">Hint 2:</div>
-                        <div class="hinttext">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim. Rutrum quisque non tellus orci ac auctor augue mauris. Ut placerat orci nulla pellentesque dignissim enim sit. Vestibulum sed arcu non odio euismod lacinia. Nibh sit amet commodo nulla facilisi. Risus viverra adipiscing at in tellus integer feugiat scelerisque. Cras tincidunt lobortis feugiat vivamus at augue. Aliquet eget sit amet tellus cras. Sapien faucibus et molestie ac feugiat sed.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-items">
-                <!-- panel medio -->
-                <div class="answer-question h6">Pregunta<span>|</span><span>Respuesta</span></div>
-                <div class="question-answer-zone">
-                  <div class="question-container">
-                    <div class="question">
-                      <div>En que pelicula de marvel aparecen los tres actores de spider-man?</div>
-                      <div class="showrating-zone">
-                        <span>Evaluación:</span>
-                        <span>😀</span>
-                      </div>
-                    </div>
-                    <div class="evaluator">
-                      <button class="bad">Mala 😫</button>
-                      <button class="good">Mas o Menos 😀</button>
-                      <button class="perfect">Buena 🤩</button>
-                    </div>
-                  </div>
-                  <div class="answer-container">
-                    <div class="answer">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
-                        <div class="showrating-zone">
-                            <span>Evaluación:</span>
-                            <span>😫</span>
-                          </div>
-                    </div>
-                    <div class="evaluator">
-                      <button class="bad">Mala 😫</button>
-                      <button class="good">Mas o Menos 😀</button>
-                      <button class="perfect">Buena 🤩</button>
-                    </div>
-                  </div>
-                  <div class="answer-container">
-                    <div class="answer">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
-                        <div class="showrating-zone">
-                            <span>Evaluación:</span>
-                            <span>😫</span>
-                          </div>
-                    </div>
-                    <div class="evaluator">
-                      <button class="bad">Mala 😫</button>
-                      <button class="good">Mas o Menos 😀</button>
-                      <button class="perfect">Buena 🤩</button>
-                    </div>
-                  </div>
-                  <div class="answer-container">
-                    <div class="answer">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
-                        <div class="showrating-zone">
-                            <span>Evaluación:</span>
-                            <span>🤩</span>
-                          </div>
-                    </div>
-                    <div class="evaluator">
-                      <button class="bad">Mala 😫</button>
-                      <button class="good">Mas o Menos 😀</button>
-                      <button class="perfect">Buena 🤩</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-zone">
-                    <textarea id="qtextarea" name="qtextarea" placeholder="Escribe aquí..."></textarea>
-                    <input type="submit" value="Enviar" name="isent" id="btnsendaq">
-                </div>
-            </div>
-            <div class="flex-items">
-                <div class="flex-column">
-                    <div class="room-data">
-                      <div class="room-players">Jugadores: 5</div>
-                    </div>
-                    <div class="players-list-holder">
-                      <div class="players-tags-container">
-                        <div class="flex-row player-tag pregunton">
-                          <div class="left">
-                            <img class="icon" src="css/Pregunton.svg"></img>
-                            <span>Jugador 1 (owner)</span>
-                          </div>
-                          <div class="right">
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 2</span>
-                          </div>
-                          <div class="right">
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 3</span>
-                          </div>
-                          <div class="right">
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 4</span>
-                          </div>
-                          <div class="right">
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                            <img class="heart" src="css/heart.svg"></img>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player-disqualified player">
-                          <div class="left">
-                            <span>Jugador 5</span>
-                          </div>
-                          <div class="right">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                <div class="flex-column">
-                    <div class="room-data">
-                      <div class="room-players">Puntajes</div>
-                    </div>
-                    <div class="players-list-holder">
-                      <div class="players-tags-container">
-                        <div class="flex-row player-tag pregunton">
-                          <div class="left">
-                            <img class="icon" src="css/Pregunton.svg"></img>
-                            <span>Jugador 1 (owner)</span>
-                          </div>
-                          <div class="right">
-                            <div>60</div>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 2</span>
-                          </div>
-                          <div class="right">
-                            <div>55</div>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 3</span>
-                          </div>
-                          <div class="right">
-                            <div>44</div>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 4</span>
-                          </div>
-                          <div class="right">
-                            <div>31</div>
-                          </div>
-                        </div>
-                        <div class="flex-row player-tag player">
-                          <div class="left">
-                            <img class="icon" src="css/player.svg"></img>
-                            <span>Jugador 5</span>
-                          </div>
-                          <div class="right">
-                            <div>3</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
+          </div>
+          <div class="modal-finish-button">
+            <button class="finish-game-button" id="btn-leave">Partidas Disponibles</button>          
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="flex-items">
+        <span>Ronda: 6 / 10</span>
+        <div class="timer">
+          <div>Tiempo Restante</div>
+          <div class="displaytime">46s</div>
+        </div>
+        <div class="hint-container">
+          <div class="hintone">
+            <div class="hint-title h6">Hint 1:</div>
+            <div class="hinttext">
+              Nibh sed pulvinar proin gravida hendrerit lectus a. Nibh tortor id aliquet lectus proin nibh nisl condimentum id. Mus mauris vitae ultricies leo integer malesuada nunc vel risus. Enim nunc faucibus a pellentesque. Pretium lectus quam id leo in vitae turpis massa sed. Aenean et tortor at risus viverra adipiscing. Curabitur gravida arcu ac tortor dignissim convallis. Id nibh tortor id aliquet lectus. Enim nunc faucibus a pellentesque. Curabitur vitae nunc sed velit dignissim. Vitae justo eget magna fermentum iaculis. Dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu.
+            </div>
+          </div>
+          <div class="hinttwo">
+            <div class="hint-title h6">Hint 2:</div>
+            <div class="hinttext">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim. Rutrum quisque non tellus orci ac auctor augue mauris. Ut placerat orci nulla pellentesque dignissim enim sit. Vestibulum sed arcu non odio euismod lacinia. Nibh sit amet commodo nulla facilisi. Risus viverra adipiscing at in tellus integer feugiat scelerisque. Cras tincidunt lobortis feugiat vivamus at augue. Aliquet eget sit amet tellus cras. Sapien faucibus et molestie ac feugiat sed.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-items">
+        <!-- panel medio -->
+        <div class="answer-question h6">Pregunta<span>|</span><span>Respuesta</span></div>
+        <div class="question-answer-zone">
+          <div class="question-container">
+            <div class="question">
+              <div>En que pelicula de marvel aparecen los tres actores de spider-man?</div>
+              <div class="showrating-zone">
+                <span>Evaluación:</span>
+                <span>😀</span>
+              </div>
+            </div>
+            <div class="evaluator">
+              <button class="bad">Mala 😫</button>
+              <button class="good">Mas o Menos 😀</button>
+              <button class="perfect">Buena 🤩</button>
+            </div>
+          </div>
+          <div class="answer-container">
+            <div class="answer">
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
+              <div class="showrating-zone">
+                <span>Evaluación:</span>
+                <span>😫</span>
+              </div>
+            </div>
+            <div class="evaluator">
+              <button class="bad">Mala 😫</button>
+              <button class="good">Mas o Menos 😀</button>
+              <button class="perfect">Buena 🤩</button>
+            </div>
+          </div>
+          <div class="answer-container">
+            <div class="answer">
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
+              <div class="showrating-zone">
+                <span>Evaluación:</span>
+                <span>😫</span>
+              </div>
+            </div>
+            <div class="evaluator">
+              <button class="bad">Mala 😫</button>
+              <button class="good">Mas o Menos 😀</button>
+              <button class="perfect">Buena 🤩</button>
+            </div>
+          </div>
+          <div class="answer-container">
+            <div class="answer">
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp</div>
+              <div class="showrating-zone">
+                <span>Evaluación:</span>
+                <span>🤩</span>
+              </div>
+            </div>
+            <div class="evaluator">
+              <button class="bad">Mala 😫</button>
+              <button class="good">Mas o Menos 😀</button>
+              <button class="perfect">Buena 🤩</button>
+            </div>
+          </div>
+        </div>
+        <div class="input-zone">
+          <textarea id="qtextarea" name="qtextarea" placeholder="Escribe aquí..."></textarea>
+          <button onclick="showModal()" id="btnsendaq">Enviar</button>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div class="flex-column">
+          <div class="room-data">
+            <div class="room-players">Jugadores: 5</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player-disqualified player">
+                <div class="left">
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-column">
+          <div class="room-data">
+            <div class="room-players">Puntajes</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <div>60</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <div>55</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <div>44</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <div>31</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                  <div>3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

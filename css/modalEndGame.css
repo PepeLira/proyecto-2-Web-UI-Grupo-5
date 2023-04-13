@@ -25,20 +25,6 @@
   align-items: center;
 }
 
-.close {
-  color: #aaa;
-  
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-  
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 .modal-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -46,34 +32,15 @@
   margin-bottom: 0.5rem;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#gameName, select {
-  font-size: 1rem;
-  width: 20rem;
-  border: 2px solid var(--color-highlight);
-  height: 2rem;
-  border-radius: 0.5rem;
-  background-color: var(--color-background);
-  color: var(--color-gray);
-}
-
-#submit {
+.finish-game-button {
   padding: 10px;
   background-color: var(--color-highlight);
   color: var(--color-white);
   border: none;
   border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
+  font-size: 18px;
   text-align: center; 
   display: flex;
   margin: 1rem;
-  justify-content: center;
-  width: 30%;
+  align-items: center;
 }
-

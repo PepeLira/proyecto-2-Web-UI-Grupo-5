@@ -1,3 +1,14 @@
+function showModal() {
+	var modal = document.getElementById("myModal");
+    console.log("holaaa");
+	modal.style.display = "block";
+}
+
+function closeModal() {
+	var modal = document.getElementById("myModal");
+	modal.style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
     let preparando = document.getElementById("Preparando");
     let respondiendo = document.getElementById('Respondiendo');
@@ -9,6 +20,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let eltor = document.getElementsByClassName('evaluator');
     let inputzone = document.getElementById('qtextarea');
     let btnsent = document.getElementById('btnsendaq');
+    let btnend = document.getElementById('btn-leave');
     preparando.addEventListener('click', function(e){
         preparando.classList.add('indemo');
         respondiendo.classList.remove('indemo');
@@ -25,6 +37,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             elm.classList.add('hiddeninterface');
         });
         inputzone.classList.remove('hiddeninterface');
+        btnsent.classList.remove('hiddeninterface');
     });
     respondiendo.addEventListener('click', function(e){
         hints.classList.remove('hiddeninterface');
@@ -77,5 +90,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
     Array.from(eltor).forEach(elm => {
         elm.classList.add('hiddeninterface');
+    });
+    btnend.addEventListener('click', function(e){
+        window.location.pathname = 'gamesIndex.html';
     });
 });
