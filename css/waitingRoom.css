@@ -3,20 +3,96 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 50px;
-}
-.header-bar-container {
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 10px;
 }
 .logo-name {
+  flex: 1;
   margin-inline: 1rem;
 }
+.header-content { 
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
 .title {
-  margin-inline: 1rem;
   color: var(--color-white);
   background-color: var(--color-primary);
-  padding-inline: 1rem;
-  /* height: 1rem; */
+  text-align: center;
+  padding: 1rem;
+  width: 30%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.flex-column {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+
+  margin: 2rem;
+}
+
+.room-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.players-list-holder {
+  border: 5px solid var(--color-secondary);
+  height: 20rem;
+  width: 30rem;
+  border-radius: 20px;
+}
+
+.room-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.room-players {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+.players-list-holder {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.flex-row {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+
+  margin: 1rem;
+  padding: 0.8rem;
+}
+
+.player-tag {
+  border: 3px solid var(--color-secondary);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-secondary);
 }
