@@ -1,6 +1,9 @@
+import {addTokensToStorage} from './dataManagement.js'
+import {getGameObjects} from './dataManagement.js'
+
 let BASE_URL = "https://trivia-bck.herokuapp.com/api/"
 
-function login (username, password) {
+export function login (username, password) {
     let path = BASE_URL + "token/";
     fetch(path,{
         method: "POST",
@@ -13,8 +16,7 @@ function login (username, password) {
     .then((response) => response.json())
     .then((data) => {
         console.log("Success:", data);
-        localStorage.setItem("refresh", data.refresh);
-        localStorage.setItem("access", data.access);
+        addTokensToStorage(data)
         return "ok"
     })
     .catch((error) => {
@@ -23,7 +25,7 @@ function login (username, password) {
     })
 }
 
-function gameList (token) {
+export function gameList (token) {
     let path = BASE_URL + "games/";
     fetch(path,{
         method: 'GET',
@@ -31,7 +33,8 @@ function gameList (token) {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log("Success:", data);
+        let games = getGameObjects(data);
+        console.log("Success:", games);
         return "ok"
     })
     .catch((error) => {
@@ -40,7 +43,7 @@ function gameList (token) {
     })
 }
 
-function CreateGame(token, gameName, QTIMER, ATIMER) {
+export function CreateGame(token, gameName, QTIMER, ATIMER) {
     let path = BASE_URL + "games/";
     fetch(path, {
         method: "POST",
@@ -62,7 +65,7 @@ function CreateGame(token, gameName, QTIMER, ATIMER) {
     })
 }
 
-function deleteGame(token, gameid){
+export function deleteGame(token, gameid){
     let path = BASE_URL + "games/" + gameid + "/";
     fetch(path, {
         method: "DELETE",
@@ -78,7 +81,7 @@ function deleteGame(token, gameid){
     })
 }
 
-function GetUser(token) {
+export function GetUser(token) {
     let path = BASE_URL + "profile/";
     fetch(path,{
         method: 'GET',
@@ -97,4 +100,4 @@ function GetUser(token) {
 
 
 
-// gameList("token");
+gameList("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyNDg1MTU0LCJpYXQiOjE2ODI0NzkyMzMsImp0aSI6IjM3ZDVmOWZhNmFiYTRkMjA4NWVmYTM0YjhmMWU4MDdiIiwidXNlcl9pZCI6MTI0fQ.NSkhuK4CsL-bgOLPZbyaR_i0jOMIIEeunDWeM_CvIRM");

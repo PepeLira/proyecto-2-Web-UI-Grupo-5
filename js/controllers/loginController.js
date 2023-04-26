@@ -1,5 +1,5 @@
 import {login} from '../api.js'
-// import {addTokensToStorage} from './dataManagement.js'
+import {gameList} from '../api.js'
 
 export class LoginController{
     constructor(){
