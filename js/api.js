@@ -1,6 +1,6 @@
 let BASE_URL = "https://trivia-bck.herokuapp.com/api/"
 
-export function login (username, password) {
+function login (username, password) {
     let path = BASE_URL + "token/";
     fetch(path,{
         method: "POST",
@@ -23,6 +23,23 @@ export function login (username, password) {
     })
 }
 
+function gameList (token) {
+    let path = BASE_URL + "games/";
+    fetch(path,{
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + token}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Success:", data);
+        return "ok"
+    })
+    .catch((error) => {
+        console.log("Error", error);
+        return error;
+    })
+}
 
 
-// login("G5_Pepe","123456");
+
+// gameList("token");

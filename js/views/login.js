@@ -1,4 +1,4 @@
-import { LoginController } from "./loginController.js";
+import { LoginController } from "../controllers/loginController.js";
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const lController = new LoginController();
