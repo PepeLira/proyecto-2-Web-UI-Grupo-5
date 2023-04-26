@@ -16,3 +16,9 @@ El frontend debe permitir lo siguiente:
 Además, el frontend debe proveer de ayuda al jugador para la respuesta utilizando APIs públicas disponibles. Deberá usar al menos dos APIs distintas para ello.
 
 Todas las preguntas del juego deberán ser referentes a películas o series que estén disponibles para Chile en alguno de los siguientes servicios de streaming: Netflix, HBO Max, Star+, Amazon Prime Video, Apple TV, y que sean estrenadas desde 1990 en adelante.
+
+
+
+users:
+
+G5_jugador4  qwerty

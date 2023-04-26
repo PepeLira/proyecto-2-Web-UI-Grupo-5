@@ -1,7 +1,8 @@
+import { LoginController } from "./loginController.js";
+
 document.addEventListener("DOMContentLoaded", (event) => {
-    let forms = document.getElementsByTagName("form")[0];
-    forms.addEventListener("submit", function(e) {
-        e.preventDefault();
-        window.location.pathname = 'gamesIndex.html';
-    });
+    const lController = new LoginController();
+    window.location.pathname = 'gamesIndex.html';
 });
+
+//G5_jugador4  qwerty
