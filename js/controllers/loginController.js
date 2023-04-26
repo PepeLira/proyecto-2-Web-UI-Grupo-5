@@ -1,13 +1,14 @@
-import {login} from api.js
-import {addTokensToStorage} from dataManagement.js
+import {login} from '../api.js'
+// import {addTokensToStorage} from './dataManagement.js'
 
 export class LoginController{
     constructor(){
         this.uname = document.getElementById("username");
         this.upass = document.getElementById("password");
 
+        this.form = document.querySelector('form');
         this.submitButton = document.getElementById("submit");
-        this.submitButton.addEventListener("submit", this.onSubmit.bind(this));
+        this.form.addEventListener("submit", this.onSubmit.bind(this));
     }
 
     async onSubmit(event){
@@ -17,9 +18,8 @@ export class LoginController{
         const password = this.upass.value;
 
         try{
-            const token = await login(username,password);
-            localStorage.setItem("refresh", token.refresh);
-            localStorage.setItem("access", token.access);
+            await login(username,password);
+            window.location.pathname = 'gamesIndex.html';
         } catch (error) {
             console.log("ERROR:", error);
         }
