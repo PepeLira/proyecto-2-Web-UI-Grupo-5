@@ -1,5 +1,4 @@
 import {login} from '../api.js'
-import {gameList} from '../api.js'
 
 export class LoginController{
     constructor(){
@@ -19,7 +18,7 @@ export class LoginController{
 
         try{
             await login(username,password);
-            window.location.pathname = 'gamesIndex.html';
+            setTimeout(function(){ window.location.pathname = 'gamesIndex.html'; }, 1000);
         } catch (error) {
             console.log("ERROR:", error);
         }

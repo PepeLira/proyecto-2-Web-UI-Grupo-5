@@ -1,9 +1,10 @@
 import {addTokensToStorage} from './dataManagement.js'
+import {renewTokens} from './dataManagement.js'
 import {getGameObjects} from './dataManagement.js'
 
 let BASE_URL = "https://trivia-bck.herokuapp.com/api/"
 
-export function login (username, password) {
+export async function login (username, password) {
     let path = BASE_URL + "token/";
     fetch(path,{
         method: "POST",
@@ -24,6 +25,28 @@ export function login (username, password) {
         return error;
     })
 }
+
+export function refreshLogin (token) {
+    let path = BASE_URL + "token/refresh/";
+    let formData = new FormData();
+    formData.append("refresh", token);
+
+    fetch(path, {
+        method: "POST",
+        body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Success:", data);
+        renewTokens(data)
+        return "ok"
+    })
+    .catch((error) => {
+        console.log("Error", error);
+        return error;
+    })
+}
+
 
 export function gameList (token) {
     let path = BASE_URL + "games/";
@@ -97,7 +120,3 @@ export function GetUser(token) {
         return error;
     })
 }
-
-
-
-gameList("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyNDg1MTU0LCJpYXQiOjE2ODI0NzkyMzMsImp0aSI6IjM3ZDVmOWZhNmFiYTRkMjA4NWVmYTM0YjhmMWU4MDdiIiwidXNlcl9pZCI6MTI0fQ.NSkhuK4CsL-bgOLPZbyaR_i0jOMIIEeunDWeM_CvIRM");
