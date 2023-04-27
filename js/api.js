@@ -118,7 +118,7 @@ export function deleteGame(token, gameid){
     })
 }
 
-export function GetUser(token) {
+export function getUser(token) {
     let path = BASE_URL + "profile/";
     fetch(path,{
         method: 'GET',
@@ -127,6 +127,7 @@ export function GetUser(token) {
     .then((response) => response.json())
     .then((data) => {
         console.log("Success:", data);
+        localStorage.getItem("currentUserId", data.id)
         return "ok"
     })
     .catch((error) => {

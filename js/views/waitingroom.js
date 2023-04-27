@@ -1,4 +1,4 @@
-import { gameData } from "../api.js";
+import { gameData, getUser } from "../api.js";
 import {refreshSesion} from '../app.js'
 
 function renderPlayerLits(game) {
@@ -22,7 +22,7 @@ function renderPlayerLits(game) {
         if (game.players[index].id === game.creator.id) {
             icon.src = "css/Pregunton.svg";
             tag.classList.add("pregunton");
-            name.textContent = game.players[index].username;
+            name.textContent = game.players[index].username + " (owner)";
         }
         else {
             icon.src = "css/player.svg";
@@ -32,6 +32,19 @@ function renderPlayerLits(game) {
         partentTagsContainer.appendChild(clonedElement);
     }
 
+    if (game.creator.id !== localStorage.getItem("currentUserId")) {
+        let joinButton = document.getElementsByClassName("join-button")[0];
+        joinButton.style.visibility = "hidden";
+      
+        let roundSelector = document.getElementsByClassName("rounds-selector-contaier")[0];
+        roundSelector.style.visibility = "hidden";
+        
+        let waitingText = document.createElement("p");
+        waitingText.innerText = "Waiting for the game to start...";
+        waitingText.style.visibility = "visible";
+        waitingText.style.display = "inline-block";
+        joinButton.parentNode.insertBefore(waitingText, joinButton.nextSibling);
+      }
 }
 
 gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderPlayerLits);
