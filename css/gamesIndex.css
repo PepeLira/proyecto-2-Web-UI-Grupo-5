@@ -157,4 +157,8 @@ header {
   color: var(--color-secondary);
 }
 
+.template {
+  display: none;
+}
+
 

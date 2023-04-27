@@ -1,3 +1,6 @@
+import { GameController } from '../controllers/gameController.js'
+import {gameList} from '../api.js'
+
 function showModal() {
 	var modal = document.getElementById("myModal");
 	modal.style.display = "block";
@@ -8,9 +11,22 @@ function closeModal() {
 	modal.style.display = "none";
 }
 
+var gamesList = [];
+
+function renderGames(games) {
+	console.log(games);
+}
+
+gameList(localStorage.getItem("access"), renderGames);
+
+// const gController = new GameController();
+// console.log(gController.games);
+
 document.addEventListener("DOMContentLoaded", (event) => {
+	
 	let btnJoinGame = document.getElementsByClassName("join-button");
 	let submitBtn = document.getElementById("submit");
+
 	submitBtn.addEventListener("click", function(e) {
 		e.preventDefault();
 		window.location.pathname = 'waitingRoom.html';

@@ -48,22 +48,20 @@ export function refreshLogin (token) {
 }
 
 
-export function gameList (token) {
-    let path = BASE_URL + "games/";
-    fetch(path,{
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + token}
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        let games = getGameObjects(data);
-        console.log("Success:", games);
-        return "ok"
-    })
-    .catch((error) => {
+export async function gameList(token, callback) {
+    try {
+        const path = BASE_URL + "games/";
+        const response = await fetch(path, {
+            method: "GET",
+            headers: { Authorization: "Bearer " + token },
+        });
+        const data = await response.json();
+        const games = getGameObjects(data);
+        callback(games);
+    } catch (error) {
         console.log("Error", error);
         return error;
-    })
+    }
 }
 
 export function CreateGame(token, gameName, QTIMER, ATIMER) {
