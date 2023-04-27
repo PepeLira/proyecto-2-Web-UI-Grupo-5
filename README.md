@@ -22,3 +22,4 @@ Todas las preguntas del juego deberán ser referentes a películas o series que 
 users:
 
 G5_jugador4  qwerty
+G5_jugador5 qwerty

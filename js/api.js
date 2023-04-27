@@ -134,3 +134,21 @@ export function GetUser(token) {
         return error;
     })
 }
+
+//https://trivia-bck.herokuapp.com/api/games/gameid/join_game/
+export function JoinGame(token, gameID) {
+    let path = BASE_URL + "games/" + gameID + "/" + "join_game/";
+    fetch(path,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json", 'Authorization': 'Bearer ' + token}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Success:", data);
+        return "ok"
+    })
+    .catch((error) => {
+        console.log("Error", error);
+        return error;
+    })
+}
