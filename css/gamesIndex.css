@@ -66,6 +66,10 @@ header {
   height: 20rem;
   width: 18rem;
   border-radius: 20px;
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 
 .room-players {
