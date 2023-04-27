@@ -1,8 +1,10 @@
 import { Game } from "./models/game.js";
 
 export function addTokensToStorage(data){
+    if (data.refresh != null && data.access != null) {
     localStorage.setItem("refresh", data.refresh);
     localStorage.setItem("access", data.access);
+    }
 }
 
 export function renewTokens(data){

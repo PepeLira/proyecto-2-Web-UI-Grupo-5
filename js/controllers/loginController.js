@@ -12,13 +12,20 @@ export class LoginController{
 
     async onSubmit(event){
         event.preventDefault();
+        localStorage.removeItem("access");
 
         const username = this.uname.value;
         const password = this.upass.value;
 
         try{
             await login(username,password);
-            setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 1000);
+            setTimeout(function(){
+                if(localStorage.getItem("access") != null){
+                    window.location.pathname = 'gamesIndex.html';
+                }else{
+                    alert("Login failed");
+                }
+            }, 1000);
         } catch (error) {
             console.log("ERROR:", error);
         }
