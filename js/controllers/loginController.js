@@ -18,7 +18,7 @@ export class LoginController{
 
         try{
             await login(username,password);
-            window.location.pathname = 'gamesIndex.html';
+            setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 1000);
         } catch (error) {
             console.log("ERROR:", error);
         }
