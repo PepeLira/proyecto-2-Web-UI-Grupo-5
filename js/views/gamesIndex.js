@@ -1,5 +1,6 @@
 import { GameController } from '../controllers/gameController.js'
 import {gameList} from '../api.js'
+import {refreshSesion} from '../app.js'
 
 function showModal() {
 	var modal = document.getElementById("myModal");
@@ -23,7 +24,7 @@ gameList(localStorage.getItem("access"), renderGames);
 // console.log(gController.games);
 
 document.addEventListener("DOMContentLoaded", (event) => {
-	
+	refreshSesion();
 	let btnJoinGame = document.getElementsByClassName("join-button");
 	let submitBtn = document.getElementById("submit");
 
