@@ -145,7 +145,8 @@ export function JoinGame(token, gameID) {
     .then((response) => response.json())
     .then((data) => {
         console.log("Success:", data);
-        window.location.pathname = 'waitingRoom.html';
+        setTimeout(function(){ window.location.pathname = 'waitingRoom.html';}, 1000);
+        //window.location.pathname = 'waitingRoom.html';
         return "ok"
     })
     .catch((error) => {

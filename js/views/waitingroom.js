@@ -34,7 +34,7 @@ function renderPlayerLits(game) {
 
 }
 
-gameData(localStorage.getItem("access"),637, renderPlayerLits);
+gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderPlayerLits);
 
 document.addEventListener("DOMContentLoaded", (event) => {
 	refreshSesion();

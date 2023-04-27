@@ -55,6 +55,7 @@ function renderGames(games) {
 			jButton.id = games[index].id;
 			jButton.addEventListener("click", function(e){
 				e.preventDefault()
+				localStorage.setItem("joinedGame", e.target.id.toString());
 				JoinGame(localStorage.getItem("access"), e.target.id.toString());
 				//window.location.pathname = 'waitingRoom.html';
 			})
