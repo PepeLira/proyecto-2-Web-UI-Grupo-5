@@ -1,6 +1,7 @@
 import { gameData, getUser } from "../api.js";
 import {refreshSesion} from '../app.js'
 
+getUser(localStorage.getItem("access"));
 function renderPlayerLits(game) {
     console.log(game);
 
@@ -32,7 +33,7 @@ function renderPlayerLits(game) {
         partentTagsContainer.appendChild(clonedElement);
     }
 
-    if (game.creator.id !== localStorage.getItem("currentUserId")) {
+    if (game.creator.id != localStorage.getItem("currentUserId")) {
         let joinButton = document.getElementsByClassName("join-button")[0];
         joinButton.style.visibility = "hidden";
       

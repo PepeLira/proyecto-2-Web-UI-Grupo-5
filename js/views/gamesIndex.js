@@ -1,5 +1,5 @@
 import { GameController } from '../controllers/gameController.js'
-import {gameList, JoinGame} from '../api.js'
+import {CreateGame, gameList, JoinGame, deleteGame} from '../api.js'
 import {refreshSesion} from '../app.js'
 
 function showModal() {
@@ -15,6 +15,29 @@ function closeModal() {
 var gamesList = [];
 
 function renderGames(games) {
+	//modals
+	let smButton = document.getElementsByClassName("new-game-button")[0];
+	let scSpan = document.getElementsByClassName("close")[0];
+	smButton.addEventListener("click", showModal);
+	scSpan.addEventListener("click", closeModal);
+	//end modals
+	//new game submit
+	let form = document.getElementsByClassName("new-game-form")[0];
+	let gameNameInput = document.getElementById('gameName');
+	let questionTimeSelect = document.getElementById('questionTime');
+	let answerTimeSelect = document.getElementById('answerTime');
+	form.addEventListener('submit', (e) => {
+		e.preventDefault();
+		
+		const gameName = gameNameInput.value;
+		const questionTime = questionTimeSelect.value;
+		const answerTime = answerTimeSelect.value;
+		CreateGame(localStorage.getItem("access"), gameName, questionTime, answerTime);
+		
+		console.log(gameName, questionTime, answerTime);
+	  });
+	//end new game submit
+	//game lists
 	console.log(Object.keys(games).length);
 	console.log(games);
 	let parent = document.getElementById("roomsContainer");
@@ -64,6 +87,7 @@ function renderGames(games) {
 			parent.appendChild(clonedElement);	
 		}
 	}
+	//end game lists
 }
 
 gameList(localStorage.getItem("access"), renderGames);
@@ -76,7 +100,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 	let btnJoinGame = document.getElementsByClassName("join-button");
 	let submitBtn = document.getElementById("submit");
 
-	submitBtn.addEventListener("click", function(e) {
+	/* submitBtn.addEventListener("click", function(e) {
 		e.preventDefault();
 		window.location.pathname = 'waitingRoom.html';
 	});
@@ -85,5 +109,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
 			e.preventDefault();
 		window.location.pathname = 'waitingRoom.html';
 		});
-	});
+	}); */
 });

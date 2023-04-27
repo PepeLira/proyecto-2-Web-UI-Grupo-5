@@ -94,6 +94,8 @@ export function CreateGame(token, gameName, QTIMER, ATIMER) {
     .then((response) => response.json())
     .then((data) => {
         console.log("Success:", data);
+        localStorage.setItem("joinedGame", data.id);
+        setTimeout(function(){ window.location.pathname = 'waitingRoom.html';}, 1000);
         return "ok"
     })
     .catch((error) => {
@@ -127,7 +129,7 @@ export function getUser(token) {
     .then((response) => response.json())
     .then((data) => {
         console.log("Success:", data);
-        localStorage.getItem("currentUserId", data.id)
+        localStorage.setItem("currentUserId", data.id)
         return "ok"
     })
     .catch((error) => {
