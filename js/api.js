@@ -1,6 +1,5 @@
 import {addTokensToStorage} from './dataManagement.js'
-import {renewTokens} from './dataManagement.js'
-import {getGameObjects} from './dataManagement.js'
+import {renewTokens, getGameObjects, getGameObject} from './dataManagement.js'
 
 let BASE_URL = "https://trivia-bck.herokuapp.com/api/"
 
@@ -58,6 +57,23 @@ export async function gameList(token, callback) {
         const data = await response.json();
         const games = getGameObjects(data);
         callback(games);
+    } catch (error) {
+        console.log("Error", error);
+        return error;
+    }
+}
+
+export async function gameData(token, id, callback) {
+    try {
+        const path = BASE_URL + "games/";
+        const response = await fetch(path, {
+            method: "GET",
+            headers: { Authorization: "Bearer " + token },
+        });
+        const data = await response.json();
+        console.log(data);
+        const game = getGameObject(data, id);
+        callback(game);
     } catch (error) {
         console.log("Error", error);
         return error;
