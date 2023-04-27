@@ -22,7 +22,6 @@ function renderGames(games) {
 	for (let index = 0; index < Object.keys(games).length; index++) {
 		//clone the elem
 		let clonedElement = elem.cloneNode(true);
-		clonedElement.id = games[index].id;
 		clonedElement.classList.remove("template");
 		//get first child
 		let titlediv = clonedElement.getElementsByClassName("room-players")[0];
@@ -48,6 +47,10 @@ function renderGames(games) {
 				pTagName.textContent = games[index].creator.username;
 			}
 		}
+		//room info 
+		let playerNumbers = clonedElement.getElementsByClassName("players-number")[0];
+		let jButton = clonedElement.getElementsByClassName("join-button")[0];
+		playerNumbers.textContent = Object.keys(games[index].players).length.toString() + " players";
 
 
 		//append to parent div
