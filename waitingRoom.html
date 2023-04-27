@@ -4,7 +4,7 @@
 	<title>Sala de Espera</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/waitingRoom.css">
-  <script src="js/views/waitingroom.js" defer></script>
+  <script type="module" src="js/views/waitingroom.js" defer></script>
 </head>
 <body>
   <header>
@@ -18,58 +18,14 @@
     <div class="flex-column">
       <div class="room-data">
         <div class="room-name">Partida 1</div>
-        <div class="room-players">Jugadores: 5/12</div>
+        <div class="room-players">Jugadores: <span id="player-count">5</span>/12</div>
       </div>
       <div class="players-list-holder">
         <div class="players-tags-container">
-          <div class="flex-row player-tag pregunton">
+          <div class="flex-row player-tag template">
             <div class="left">
               <img class="icon" src="css/Pregunton.svg"></img>
-              <span>Jugador 1 (owner)</span>
-            </div>
-            <div class="right">
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-            </div>
-          </div>
-          <div class="flex-row player-tag player">
-            <div class="left">
-              <img class="icon" src="css/player.svg"></img>
-              <span>Jugador 2</span>
-            </div>
-            <div class="right">
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-            </div>
-          </div>
-          <div class="flex-row player-tag player">
-            <div class="left">
-              <img class="icon" src="css/player.svg"></img>
-              <span>Jugador 3</span>
-            </div>
-            <div class="right">
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-            </div>
-          </div>
-          <div class="flex-row player-tag player">
-            <div class="left">
-              <img class="icon" src="css/player.svg"></img>
-              <span>Jugador 4</span>
-            </div>
-            <div class="right">
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-              <img class="heart icon" src="css/heart.svg"></img>
-            </div>
-          </div>
-          <div class="flex-row player-tag player">
-            <div class="left">
-              <img class="icon" src="css/player.svg"></img>
-              <span>Jugador 5</span>
+              <span class="player-tag-name">Jugador 1 (owner)</span>
             </div>
             <div class="right">
               <img class="heart icon" src="css/heart.svg"></img>

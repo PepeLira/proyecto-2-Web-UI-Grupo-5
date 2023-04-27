@@ -52,6 +52,11 @@ header {
   height: 20rem;
   width: 30rem;
   border-radius: 20px;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .room-name {
@@ -168,4 +173,8 @@ header {
 
 .first {
   padding: 5%;
+}
+
+.template {
+  display: none;
 }
