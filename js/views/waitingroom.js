@@ -36,7 +36,7 @@ function renderPlayerLits(game) {
     if (game.creator.id != localStorage.getItem("currentUserId")) {
         let joinButton = document.getElementsByClassName("join-button")[0];
         joinButton.style.visibility = "hidden";
-      
+        
         let roundSelector = document.getElementsByClassName("rounds-selector-contaier")[0];
         roundSelector.style.visibility = "hidden";
         
@@ -45,7 +45,7 @@ function renderPlayerLits(game) {
         waitingText.style.visibility = "visible";
         waitingText.style.display = "inline-block";
         joinButton.parentNode.insertBefore(waitingText, joinButton.nextSibling);
-      }
+    }
 }
 
 gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderPlayerLits);
@@ -53,8 +53,12 @@ gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), rend
 document.addEventListener("DOMContentLoaded", (event) => {
 	refreshSesion();
     let btnStartGame = document.getElementsByClassName("join-button")[0];
+    let roundSelector = document.getElementsByClassName("rounds-selector");
     btnStartGame.addEventListener("click", function(e) {
         e.preventDefault();
-        window.location.pathname = 'game.html';
+
+        let rounsNumber = parseInt(roundSelector.rounds.value);
+        sendGameStart(rounsNumber,socket);
+        // window.location.pathname = 'game.html';
     });
 });
