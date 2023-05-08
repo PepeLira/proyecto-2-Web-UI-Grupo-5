@@ -47,9 +47,28 @@ if ( value !== null && token !== null) {
         }
 
         else if (info.type === 'game_started') {
-            // Refresh the current page
-            window.location.pathname = 'game.html';
+            localStorage.setItem("step", '0');
+            window.location.pathname = 'gamePreparing.html';
         }
+
+        else if (info.type === 'question_time_ended') {
+            localStorage.setItem("step", '2');
+            window.location.pathname = 'gameResponces.html';
+        }
+        else if (info.type === 'answer_time_ended') {
+            localStorage.setItem("step", '3');
+            window.location.pathname = 'gameEvaluation.html';
+        }
+        else if (info.type === 'qualify_timeout') {
+            localStorage.setItem("step", '4');
+            window.location.pathname = 'gameReview.html';
+        }
+        else if (info.type === 'round_started') {
+            localStorage.setItem("step", '1');
+            localStorage.setItem("pregunton", info.nosy_id);
+            window.location.pathname = 'gamePreparing.html';
+        }
+
     });
     // Event: WebSocket connection closed
     socket.addEventListener('close', () => {

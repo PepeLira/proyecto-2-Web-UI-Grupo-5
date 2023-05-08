@@ -4,15 +4,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/modalEndGame.css">
-    <script src="js/views/game.js" defer></script>
     <script src="js/wSocket.js" defer></script>
+    <script type="module" src="js/views/game.js"></script>
   </head>
   <body>
     <header>
       <div class="logo-name h3">¿Preguntón?</div>
       <div class="header-content">
         <div class="title h6" id="Preparando">Preparando pregunta</div>
-        <div class="title h6" id="Respondiendo">Respondiendo</div>
+        <div class="title h6 indemo" id="Respondiendo">Respondiendo</div>
         <div class="title h6" id="Evaluando">Evaluando</div>
         <div class="title h6" id="Revisando">Revisando</div>
       </div>
@@ -84,7 +84,7 @@
         <span>Ronda: 6 / 10</span>
         <div class="timer">
           <div>Tiempo Restante</div>
-          <div class="displaytime">46s</div>
+          <div class="displaytime"></div>
         </div>
         <div class="hint-container">
           <div class="hintone">

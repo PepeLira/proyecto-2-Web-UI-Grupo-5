@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/modalEndGame.css">
+    <script src="js/wSocket.js" defer></script>
+    <script type="module" src="js/views/game.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo-name h3">¿Preguntón?</div>
+      <div class="header-content">
+        <div class="title h6 indemo" id="Preparando">Preparando pregunta</div>
+        <div class="title h6" id="Respondiendo">Respondiendo</div>
+        <div class="title h6" id="Evaluando">Evaluando</div>
+        <div class="title h6" id="Revisando">Revisando</div>
+      </div>
+    </header>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-title h4">Fin Del Juego</div>
+          <div class="room-data">
+            <div class="room-players">Puntajes</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <div>60</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <div>55</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <div>44</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <div>31</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                  <div>3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-finish-button">
+            <button class="finish-game-button" id="btn-leave">Partidas Disponibles</button>          
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="flex-items">
+        <span>Ronda: 6 / 10</span>
+        <div class="timer">
+          <div>Tiempo Restante</div>
+          <div class="displaytime"></div>
+        </div>
+      </div>  
+      <div class="flex-items">
+        <!-- panel medio -->
+        <div class="answer-question h6">Pregunta<span>|</span><span>Respuesta</span></div>
+        <div class="question-answer-zone">
+          <div class="question-container">
+            <div class="question">
+              <div>En que pelicula de marvel aparecen los tres actores de spider-man?</div>
+            </div>
+          </div>
+        </div>
+        <div class="input-zone">
+          <textarea id="qtextarea" name="qtextarea" placeholder="Escribe aquí..."></textarea>
+          <button onclick="showModal()" id="btnsendaq">Enviar</button>
+        </div>
+      </div>
+      <div class="flex-items">
+        <div class="flex-column">
+          <div class="room-data">
+            <div class="room-players">Jugadores: 5</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                  <img class="heart" src="css/heart.svg"></img>
+                </div>
+              </div>
+              <div class="flex-row player-tag player-disqualified player">
+                <div class="left">
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-column">
+          <div class="room-data">
+            <div class="room-players">Puntajes</div>
+          </div>
+          <div class="players-list-holder">
+            <div class="players-tags-container">
+              <div class="flex-row player-tag pregunton">
+                <div class="left">
+                  <img class="icon" src="css/Pregunton.svg"></img>
+                  <span>Jugador 1 (owner)</span>
+                </div>
+                <div class="right">
+                  <div>60</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 2</span>
+                </div>
+                <div class="right">
+                  <div>55</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 3</span>
+                </div>
+                <div class="right">
+                  <div>44</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 4</span>
+                </div>
+                <div class="right">
+                  <div>31</div>
+                </div>
+              </div>
+              <div class="flex-row player-tag player">
+                <div class="left">
+                  <img class="icon" src="css/player.svg"></img>
+                  <span>Jugador 5</span>
+                </div>
+                <div class="right">
+                  <div>3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

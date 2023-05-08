@@ -16,6 +16,8 @@ export class Game {
         this.qualifications = {};
         this.started = false;
         this.ended = false;
+        this.evaluationTime = 90;
+        this.qualifierTime = 30;
     }
   
     addPlayer(player) {
