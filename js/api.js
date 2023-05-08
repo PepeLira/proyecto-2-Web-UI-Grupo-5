@@ -157,3 +157,22 @@ export function JoinGame(token, gameID) {
         return error;
     })
 }
+
+//get current started game data
+export function GetStartedGame(token, gameID){
+    //https://trivia-bck.herokuapp.com/api/games/gameid/state/
+    let path = BASE_URL + "games/" + gameID + "/" + "state/";
+    fetch(path,{
+        method: 'POST',
+        headers: {"Content-Type": "multipart/form-data", 'Authorization': 'Bearer ' + token}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Success:", data);
+        return "ok"
+    })
+    .catch((error) => {
+        console.log("Error", error);
+        return error;
+    })
+}
