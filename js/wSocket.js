@@ -11,9 +11,11 @@ if ( value !== null && token !== null) {
     // Event: Message received from the server
     socket.addEventListener('message', (event) => {
         console.log('Received message from the server:', event.data);
-      
-        // Process the received message as needed
-        // ...
+        let info = JSON.parse(event.data);
+        if ( info.type === "player_joined" ) {
+            //hacer algo con player joined si es necesario
+            //funcion aquii            
+        }
     });
     // Event: WebSocket connection closed
     socket.addEventListener('close', () => {
@@ -25,3 +27,6 @@ if ( value !== null && token !== null) {
     console.error('WebSocket error:', error);
     });
 }
+
+//Para enviar en socket
+//socket.send(aqui un json);
