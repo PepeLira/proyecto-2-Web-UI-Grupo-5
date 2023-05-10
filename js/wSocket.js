@@ -27,6 +27,46 @@ function sendGameStart(r, mySocket) {
     }
 }
 
+function renderPlayers(players) {
+    const container = document.querySelector('.players-tags-container');
+
+    for (let i = 0; i < players.length; i++) {
+        const player = players[i];
+        
+        if (player.userid === parseInt(localStorage.getItem('currentUserId'))) {
+            player.username += ' (you)';
+        }
+        
+        const playerTag = document.createElement('div');
+        playerTag.classList.add('flex-row', 'player-tag', 'player');
+        
+        const left = document.createElement('div');
+        left.classList.add('left');
+        const icon = document.createElement('img');
+        icon.classList.add('icon');
+        icon.setAttribute('src', 'css/player.svg');
+        const span = document.createElement('span');
+        span.textContent = player.username;
+        left.appendChild(icon);
+        left.appendChild(span);
+        
+        const right = document.createElement('div');
+        right.classList.add('right');
+        
+        for (let j = 0; j < 3; j++) {
+            const heart = document.createElement('img');
+            heart.classList.add('heart');
+            heart.setAttribute('src', 'css/heart.svg');
+            right.appendChild(heart);
+        }
+        
+        playerTag.appendChild(left);
+        playerTag.appendChild(right);
+        
+        container.appendChild(playerTag);
+    }
+}
+
 if ( value !== null && token !== null) {
     let wsUrl = "wss://trivia-bck.herokuapp.com/ws/trivia/" + value.toString() + "/?token=" + token.toString();
     var socket = new WebSocket(wsUrl);
@@ -48,25 +88,28 @@ if ( value !== null && token !== null) {
 
         else if (info.type === 'game_started') {
             localStorage.setItem("step", '0');
-            window.location.pathname = 'gamePreparing.html';
+            localStorage.setItem("players", JSON.stringify(info.players));
+            window.location.pathname = 'game.html';
+        }
+
+        else if (info.type === 'round_started') {
+            localStorage.setItem("round_number", info.round_number);
+            localStorage.setItem("pregunton", info.nosy_id);
         }
 
         else if (info.type === 'question_time_ended') {
             localStorage.setItem("step", '2');
-            window.location.pathname = 'gameResponces.html';
+            localStorage.setItem("pregunton", info.nosy_id);
         }
         else if (info.type === 'answer_time_ended') {
             localStorage.setItem("step", '3');
-            window.location.pathname = 'gameEvaluation.html';
         }
         else if (info.type === 'qualify_timeout') {
             localStorage.setItem("step", '4');
-            window.location.pathname = 'gameReview.html';
         }
         else if (info.type === 'round_started') {
             localStorage.setItem("step", '1');
             localStorage.setItem("pregunton", info.nosy_id);
-            window.location.pathname = 'gamePreparing.html';
         }
 
     });
@@ -83,3 +126,4 @@ if ( value !== null && token !== null) {
 
 //Para enviar en socket
 //socket.send(aqui un json);
+

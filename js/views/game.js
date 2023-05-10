@@ -13,29 +13,60 @@ function closeModal() {
 	modal.style.display = "none";
 }
 
+function renderPlayers(players) {
+    const container = document.querySelector('.players-tags-container');
+
+    for (let i = 0; i < players.length; i++) {
+        const player = players[i];
+        
+        if (player.userid === parseInt(localStorage.getItem('currentUserId'))) {
+            player.username += ' (you)';
+        }
+        
+        const playerTag = document.createElement('div');
+        playerTag.classList.add('flex-row', 'player-tag', 'player');
+        
+        const left = document.createElement('div');
+        left.classList.add('left');
+        const icon = document.createElement('img');
+        icon.classList.add('icon');
+        icon.setAttribute('src', 'css/player.svg');
+        const span = document.createElement('span');
+        span.textContent = player.username;
+        left.appendChild(icon);
+        left.appendChild(span);
+        
+        const right = document.createElement('div');
+        right.classList.add('right');
+        
+        for (let j = 0; j < 3; j++) {
+            const heart = document.createElement('img');
+            heart.classList.add('heart');
+            heart.setAttribute('src', 'css/heart.svg');
+            right.appendChild(heart);
+        }
+        
+        playerTag.appendChild(left);
+        playerTag.appendChild(right);
+        
+        container.appendChild(playerTag);
+    }
+}
+
 function renderDisplayTime(roundTime) {
-    // Get the HTML element that will display the countdown
     let countdownElement = document.getElementsByClassName("displaytime");
     
-
-    // Set the initial time value
     let timeLeft = roundTime;
 
-    // Update the countdown text every second
     let countdownInterval = setInterval(() => {
-    // Decrement the time left by one second
-    timeLeft -= 1;
-    // Update the countdown text
-    countdownElement[0].textContent = timeLeft.toString() + "s";
+        timeLeft -= 1;
+        countdownElement[0].textContent = timeLeft.toString() + "s";
 
-    // Check if the timer has reached zero
-    if (timeLeft <= 0) {
-        // Clear the countdown interval
-        clearInterval(countdownInterval);
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
 
-        // Display a message when the timer is done
-        countdownElement[0].textContent = "0s";
-    }
+            countdownElement[0].textContent = "0s";
+        }
     }, 1000);
 
 }
@@ -62,6 +93,9 @@ function renderGameInfo(game) {
     renderDisplayTime(stepTime);
 
 }
+
+
+renderPlayers(JSON.parse(localStorage.getItem("players")));
 
 gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderGameInfo);
 
