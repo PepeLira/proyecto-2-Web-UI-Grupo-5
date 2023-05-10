@@ -14,7 +14,7 @@ function closeModal() {
 }
 
 function renderPlayers(players) {
-    const container = document.querySelector('.players-tags-container');
+    const container = document.getElementsByClassName('players-tags-container')[0];
 
     for (let i = 0; i < players.length; i++) {
         const player = players[i];

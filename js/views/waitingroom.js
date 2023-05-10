@@ -1,5 +1,6 @@
 import { gameData, getUser } from "../api.js";
-import {refreshSesion} from '../app.js'
+import {refreshSesion} from '../app.js';
+import {socket} from '../wSocket.js';
 
 getUser(localStorage.getItem("access"));
 function renderPlayerLits(game) {
@@ -46,6 +47,10 @@ function renderPlayerLits(game) {
         waitingText.style.display = "inline-block";
         joinButton.parentNode.insertBefore(waitingText, joinButton.nextSibling);
       }
+      localStorage.setItem("answerTime", game.answerTime);
+      localStorage.setItem("questionTime", game.questionTime);
+      localStorage.setItem("evaluationTime", game.evaluationTime);
+      localStorage.setItem("qualifierTime", game.qualifierTime);
 }
 
 gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderPlayerLits);
@@ -55,6 +60,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let btnStartGame = document.getElementsByClassName("join-button")[0];
     btnStartGame.addEventListener("click", function(e) {
         e.preventDefault();
-        window.location.pathname = 'game.html';
+        var rounds = document.getElementsByClassName("rounds-selector")[0].value;
+        var info = {
+            "action": "start",
+            "rounds": rounds.toString()
+        };
+        console.log(socket);
+        console.log(JSON.stringify(info));
+        socket.send(
+            JSON.stringify(info)
+        )
+        //setTimeout(function(){ window.location.pathname = 'game.html';}, 3000);
     });
 });

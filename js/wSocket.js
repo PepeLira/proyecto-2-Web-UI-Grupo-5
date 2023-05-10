@@ -1,5 +1,6 @@
 let value = localStorage.getItem("joinedGame");
 let token = localStorage.getItem("access");
+export var socket = "";
 
 function parseInfo(event) {
     var info = JSON.parse(event.data);
@@ -28,7 +29,7 @@ function sendGameStart(r, mySocket) {
 }
 
 function renderPlayers(players) {
-    const container = document.querySelector('.players-tags-container');
+    const container = document.getElementsByClassName('.players-tags-container')[0];
 
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
@@ -69,7 +70,7 @@ function renderPlayers(players) {
 
 if ( value !== null && token !== null) {
     let wsUrl = "wss://trivia-bck.herokuapp.com/ws/trivia/" + value.toString() + "/?token=" + token.toString();
-    var socket = new WebSocket(wsUrl);
+    socket = new WebSocket(wsUrl);
 
     // Event: WebSocket is opened
     socket.addEventListener('open', () => {
@@ -89,7 +90,8 @@ if ( value !== null && token !== null) {
         else if (info.type === 'game_started') {
             localStorage.setItem("step", '0');
             localStorage.setItem("players", JSON.stringify(info.players));
-            window.location.pathname = 'game.html';
+            localStorage.setItem("started", "true");
+            setTimeout(function(){ window.location.pathname = 'game.html';}, 1000);
         }
 
         else if (info.type === 'round_started') {
@@ -111,11 +113,22 @@ if ( value !== null && token !== null) {
             localStorage.setItem("step", '1');
             localStorage.setItem("pregunton", info.nosy_id);
         }
+        else if (info.type === "game_result") {
+            localStorage.setItem("started", "false");
+            //20 segundos para alcanzar leer consola
+            setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 20000);
+        }
+        else if (info.type === "game_canceled") {
+            localStorage.setItem("started", "false");
+            //20 segundos para alcanzar leer consola
+            setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 20000);
+        }
 
     });
     // Event: WebSocket connection closed
-    socket.addEventListener('close', () => {
+    socket.addEventListener('close', (event) => {
     console.log('WebSocket connection is closed.');
+    console.log(event);
     });
     
     // Event: WebSocket error occurred
