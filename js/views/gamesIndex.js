@@ -1,7 +1,9 @@
 import { GameController } from '../controllers/gameController.js'
-import {CreateGame, gameList, JoinGame, deleteGame} from '../api.js'
+import {CreateGame, gameList, JoinGame, deleteGame, getUser} from '../api.js'
 import {refreshSesion} from '../app.js'
 
+
+getUser(localStorage.getItem("access"));
 function showModal() {
 	var modal = document.getElementById("myModal");
 	modal.style.display = "block";

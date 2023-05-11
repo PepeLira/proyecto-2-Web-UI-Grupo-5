@@ -1,5 +1,6 @@
 import {refreshSesion} from '../app.js'
 import { gameData, getUser } from "../api.js";
+import {socket} from '../wSocket.js';
 
 
 function showModal() {
@@ -101,4 +102,23 @@ gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), rend
 
 document.addEventListener("DOMContentLoaded", (event) => {
     refreshSesion();
+    var btn = document.getElementById("sendQ");
+    btn.addEventListener("click", function(event) {
+        event.preventDefault()
+        let myText = document.getElementById("qtextarea");
+        if (localStorage.getItem("pregunton") === localStorage.getItem("currentUserId")) {
+            let message = {
+                "action": "question",
+                "text": myText.value.toString()
+            };
+            console.log(socket);
+            console.log(JSON.stringify(message));
+            socket.send(
+                JSON.stringify(message)
+            )
+        }
+        else {
+            alert("No es tu turno de enviar una pregunta")
+        }
+    });
 });
