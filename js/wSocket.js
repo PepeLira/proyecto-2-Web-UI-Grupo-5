@@ -99,6 +99,10 @@ if ( value !== null && token !== null) {
             localStorage.setItem("pregunton", info.nosy_id);
         }
 
+        else if (info.type === "round_question") {
+            //aqui inicia para responder
+        }
+
         else if (info.type === 'question_time_ended') {
             localStorage.setItem("step", '2');
             localStorage.setItem("pregunton", info.nosy_id);
