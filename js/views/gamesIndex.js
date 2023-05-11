@@ -1,4 +1,3 @@
-import { GameController } from '../controllers/gameController.js'
 import {CreateGame, gameList, JoinGame, deleteGame, getUser} from '../api.js'
 import {refreshSesion} from '../app.js'
 
@@ -94,8 +93,6 @@ function renderGames(games) {
 
 gameList(localStorage.getItem("access"), renderGames);
 
-// const gController = new GameController();
-// console.log(gController.games);
 
 document.addEventListener("DOMContentLoaded", (event) => {
 	refreshSesion();

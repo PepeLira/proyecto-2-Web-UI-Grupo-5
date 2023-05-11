@@ -1,5 +1,10 @@
+import { renderQuestion, renderPregunton, startStepTimer, renderAnswer, getQuestion,  getAnswer} from './controllers/mainController.js';
+
 let value = localStorage.getItem("joinedGame");
 let token = localStorage.getItem("access");
+let countdownInterval;
+let sendBtnListener;
+
 export var socket = "";
 
 function parseInfo(event) {
@@ -25,46 +30,6 @@ function sendGameStart(r, mySocket) {
     if ( value !== null && token !== null) {
         var messageJson = gameStartMessage(r);
         sendInfo(messageJson, mySocket);
-    }
-}
-
-function renderPlayers(players) {
-    const container = document.getElementsByClassName('.players-tags-container')[0];
-
-    for (let i = 0; i < players.length; i++) {
-        const player = players[i];
-        
-        if (player.userid === parseInt(localStorage.getItem('currentUserId'))) {
-            player.username += ' (you)';
-        }
-        
-        const playerTag = document.createElement('div');
-        playerTag.classList.add('flex-row', 'player-tag', 'player');
-        
-        const left = document.createElement('div');
-        left.classList.add('left');
-        const icon = document.createElement('img');
-        icon.classList.add('icon');
-        icon.setAttribute('src', 'css/player.svg');
-        const span = document.createElement('span');
-        span.textContent = player.username;
-        left.appendChild(icon);
-        left.appendChild(span);
-        
-        const right = document.createElement('div');
-        right.classList.add('right');
-        
-        for (let j = 0; j < 3; j++) {
-            const heart = document.createElement('img');
-            heart.classList.add('heart');
-            heart.setAttribute('src', 'css/heart.svg');
-            right.appendChild(heart);
-        }
-        
-        playerTag.appendChild(left);
-        playerTag.appendChild(right);
-        
-        container.appendChild(playerTag);
     }
 }
 
@@ -95,20 +60,33 @@ if ( value !== null && token !== null) {
         }
 
         else if (info.type === 'round_started') {
+            renderPregunton(info.nosy_id);
+            localStorage.setItem("step", '1');
             localStorage.setItem("round_number", info.round_number);
             localStorage.setItem("pregunton", info.nosy_id);
+            countdownInterval = startStepTimer(1, countdownInterval);
+            sendBtnListener = getQuestion();
         }
 
         else if (info.type === "round_question") {
-            //aqui inicia para responder
+            localStorage.setItem("step", '2');
+            getAnswer(sendBtnListener);
+            localStorage.setItem("current_question", info.question);
+            countdownInterval = startStepTimer(2, countdownInterval);
+            renderQuestion(info.question);
         }
 
         else if (info.type === 'question_time_ended') {
             localStorage.setItem("step", '2');
             localStorage.setItem("pregunton", info.nosy_id);
         }
+        else if (info.type === 'round_answer') {
+            renderAnswer(info.answer, info.userid);
+        }
         else if (info.type === 'answer_time_ended') {
             localStorage.setItem("step", '3');
+            localStorage.setItem("pregunton", info.nosy_id);
+            countdownInterval = startStepTimer(3, countdownInterval);
         }
         else if (info.type === 'qualify_timeout') {
             localStorage.setItem("step", '4');
@@ -119,11 +97,13 @@ if ( value !== null && token !== null) {
         }
         else if (info.type === "game_result") {
             localStorage.setItem("started", "false");
+            localStorage.setItem("step", '0');
             //20 segundos para alcanzar leer consola
             setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 20000);
         }
         else if (info.type === "game_canceled") {
             localStorage.setItem("started", "false");
+            localStorage.setItem("step", '0');
             //20 segundos para alcanzar leer consola
             setTimeout(function(){ window.location.pathname = 'gamesIndex.html';}, 20000);
         }

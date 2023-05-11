@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/modalEndGame.css">
     <script type="module" src="js/views/game.js"></script>
+    <script type="module" src="js/controllers/mainController.js"></script>
     <script type="module" src="js/wSocket.js"></script>
   </head>
   <body>
@@ -105,7 +106,7 @@
         <!-- panel medio -->
         <div class="answer-question h6">Pregunta<span>|</span><span>Respuesta</span></div>
         <div class="question-answer-zone">
-          <div class="question-container">
+          <!-- <div class="question-container">
             <div class="question">
               <div>En que pelicula de marvel aparecen los tres actores de spider-man?</div>
               <div class="showrating-zone">
@@ -160,12 +161,11 @@
               <button class="good">Mas o Menos 😀</button>
               <button class="perfect">Buena 🤩</button>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="input-zone">
           <textarea id="qtextarea" name="qtextarea" placeholder="Escribe aquí..."></textarea>
-          <button onclick="showModal()" id="btnsendaq">Enviar</button>
-          <button id="sendQ">Enviar pregunta</button>
+          <button id="btnsendaq">Enviar</button>
         </div>
       </div>
       <div class="flex-items">

@@ -1,5 +1,4 @@
 import {refreshSesion} from '../app.js'
-import { gameData, getUser } from "../api.js";
 import {socket} from '../wSocket.js';
 
 
@@ -54,71 +53,7 @@ function renderPlayers(players) {
     }
 }
 
-function renderDisplayTime(roundTime) {
-    let countdownElement = document.getElementsByClassName("displaytime");
-    
-    let timeLeft = roundTime;
-
-    let countdownInterval = setInterval(() => {
-        timeLeft -= 1;
-        countdownElement[0].textContent = timeLeft.toString() + "s";
-
-        if (timeLeft <= 0) {
-            clearInterval(countdownInterval);
-
-            countdownElement[0].textContent = "0s";
-        }
-    }, 1000);
-
-}
-
-function renderGameInfo(game) {
-    console.log(game);
-    let currentStep = localStorage.getItem("step");
-    let stepTime;
-    if (currentStep == "1") {
-        stepTime = game.questionTime;
-    }
-    else if (currentStep == "2") {
-        stepTime = game.answerTime;
-    }
-    else if (currentStep == "3") {
-        stepTime = game.evaluationTime;
-    }
-    else if (currentStep == "4") {
-        stepTime = game.qualifierTime;
-    }
-    else {
-        stepTime = 0;
-    }
-    renderDisplayTime(stepTime);
-
-}
-
-
-renderPlayers(JSON.parse(localStorage.getItem("players")));
-
-gameData(localStorage.getItem("access"),localStorage.getItem("joinedGame"), renderGameInfo);
-
 document.addEventListener("DOMContentLoaded", (event) => {
+    renderPlayers(JSON.parse(localStorage.getItem("players")));
     refreshSesion();
-    var btn = document.getElementById("sendQ");
-    btn.addEventListener("click", function(event) {
-        event.preventDefault()
-        let myText = document.getElementById("qtextarea");
-        if (localStorage.getItem("pregunton") === localStorage.getItem("currentUserId")) {
-            let message = {
-                "action": "question",
-                "text": myText.value.toString()
-            };
-            console.log(socket);
-            console.log(JSON.stringify(message));
-            socket.send(
-                JSON.stringify(message)
-            )
-        }
-        else {
-            alert("No es tu turno de enviar una pregunta")
-        }
-    });
 });
