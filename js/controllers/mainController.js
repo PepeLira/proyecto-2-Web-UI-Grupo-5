@@ -227,7 +227,7 @@ function handleReviewClick(event){
     let message = {
         "action": "qualify",
         "userid": parseInt(answerDiv.getAttribute("userid")),
-        "grade ": parseInt(event.target.value)
+        "grade": parseInt(event.target.value)
     };
     console.log(socket);
     console.log(JSON.stringify(message));
