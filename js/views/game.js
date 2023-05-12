@@ -1,5 +1,6 @@
 import {refreshSesion} from '../app.js'
 import {socket} from '../wSocket.js';
+import { addPlayerScores } from '../controllers/mainController.js';
 
 
 function showModal() {
@@ -53,7 +54,25 @@ function renderPlayers(players) {
     }
 }
 
+function ceroScores() {
+    const players = JSON.parse(localStorage.getItem('players'));
+    const scoreObject = {};
+    players.forEach(player => {
+        scoreObject[player.userid] = 0;
+    });
+    return scoreObject;
+}
+
+function updatePlayerCount() {
+    const players = JSON.parse(localStorage.getItem('players')) || [];
+    const playerCount = players.length;
+    const plrSpan = document.getElementById('plr-span');
+    plrSpan.innerText = playerCount.toString();
+  }
+
 document.addEventListener("DOMContentLoaded", (event) => {
     renderPlayers(JSON.parse(localStorage.getItem("players")));
     refreshSesion();
+    addPlayerScores(ceroScores());
+    updatePlayerCount();
 });

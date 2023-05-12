@@ -1,4 +1,16 @@
-import { renderQuestion, renderPregunton, renderEvaluation, startStepTimer, renderAnswer, getQuestion,  getAnswer} from './controllers/mainController.js';
+import {
+    renderQuestion,
+    renderPregunton,
+    renderEvaluation,
+    startStepTimer,
+    addPlayerScores,
+    renderAnswer,
+    renderReview,
+    getQuestion,
+    getAnswer, 
+    clearQuestionAnswers
+  } from './controllers/mainController.js';
+
 
 let value = localStorage.getItem("joinedGame");
 let token = localStorage.getItem("access");
@@ -33,6 +45,11 @@ function sendGameStart(r, mySocket) {
     }
 }
 
+function updateRoundCount(rounds, id) {
+    const roundsSpan = document.querySelector(id);
+    roundsSpan.textContent = rounds.toString();
+}
+
 if ( value !== null && token !== null) {
     let wsUrl = "wss://trivia-bck.herokuapp.com/ws/trivia/" + value.toString() + "/?token=" + token.toString();
     socket = new WebSocket(wsUrl);
@@ -53,6 +70,7 @@ if ( value !== null && token !== null) {
         }
 
         else if (info.type === 'game_started') {
+            localStorage.setItem("roundsNumber", info.rounds);
             localStorage.setItem("step", '0');
             localStorage.setItem("players", JSON.stringify(info.players));
             localStorage.setItem("started", "true");
@@ -60,12 +78,15 @@ if ( value !== null && token !== null) {
         }
 
         else if (info.type === 'round_started') {
+            clearQuestionAnswers();
             renderPregunton(info.nosy_id);
             localStorage.setItem("step", '1');
             localStorage.setItem("round_number", info.round_number);
             localStorage.setItem("pregunton", info.nosy_id);
             countdownInterval = startStepTimer(1, countdownInterval);
             sendBtnListener = getQuestion();
+            updateRoundCount(info.round_number, '#round-spn');
+            updateRoundCount(localStorage.getItem("roundsNumber"), '#rounds-spn');
         }
 
         else if (info.type === "round_question") {
@@ -78,16 +99,17 @@ if ( value !== null && token !== null) {
 
         else if (info.type === 'question_time_ended') {
             localStorage.setItem("step", '2');
-            localStorage.setItem("pregunton", info.nosy_id);
         }
         else if (info.type === 'round_answer') {
             renderAnswer(info.answer, info.userid);
         }
         else if (info.type === 'answer_time_ended') {
             localStorage.setItem("step", '3');
-            localStorage.setItem("pregunton", info.nosy_id);
             countdownInterval = startStepTimer(3, countdownInterval);
-            sendBtnListener = renderEvaluation(sendBtnListener);
+
+            if ( localStorage.getItem("currentUserId") == localStorage.getItem("pregunton")) {
+                sendBtnListener = renderEvaluation(sendBtnListener, countdownInterval);
+            };
         }
         else if (info.type === 'qualify_timeout') {
             localStorage.setItem("step", '4');
@@ -97,10 +119,14 @@ if ( value !== null && token !== null) {
             localStorage.setItem("pregunton", info.nosy_id);
         }
         else if (info.type === "round_review_answer") {
+            countdownInterval = startStepTimer(4, countdownInterval);
             if ( localStorage.getItem("currentUserId") !== localStorage.getItem("pregunton")) {
-                countdownInterval = startStepTimer(4, countdownInterval);
-                //render qualify time for non pregunton users to send true or false to server
+                renderAnswer("Respuesta: " + info.correct_answer, 0);
+                renderReview(info.graded_answer, info.grade);
             }
+        }
+        else if (info.type === "round_result") {
+            addPlayerScores(info.game_scores);
         }
         else if (info.type === "game_result") {
             localStorage.setItem("started", "false");

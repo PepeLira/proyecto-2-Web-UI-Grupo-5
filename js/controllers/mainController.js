@@ -1,4 +1,7 @@
 import { socket } from "../wSocket.js";
+
+var countDownInterval;
+
 export function renderQuestion(questionText) {
     const questionAnswerZone = document.querySelector('.question-answer-zone');
 
@@ -15,23 +18,23 @@ export function renderQuestion(questionText) {
 } 
 
 function getUserName(userid){
-    var username;
+    var username = "";
     JSON.parse(localStorage.getItem("players")).forEach((player) => {
         if (parseInt(player.userid) === parseInt(userid)) {
-            username = player.username;
+            username = player.username + ": ";
         }
     });
     return username;
 }
 
 export function renderAnswer(answerText, userid) {
-    if (userid == parseInt(localStorage.getItem("currentUserId")) || localStorage.getItem("pregunton") === localStorage.getItem("currentUserId")) {
+    if (userid == 0 || userid == parseInt(localStorage.getItem("currentUserId")) || localStorage.getItem("pregunton") === localStorage.getItem("currentUserId")) {
         const questionAnswerZone = document.querySelector('.question-answer-zone');
         const answerContainer = document.createElement('div');
         answerContainer.classList.add('answer-container');
         const answerElement = document.createElement('div');
         answerElement.classList.add('answer');
-        answerElement.textContent = getUserName(userid) + ": " + answerText;
+        answerElement.textContent = getUserName(userid) + answerText;
         answerContainer.appendChild(answerElement);
         questionAnswerZone.appendChild(answerContainer);
         answerElement.setAttribute('userid', userid);
@@ -188,6 +191,7 @@ export function getAnswer(prevListener) {
         console.log(JSON.stringify(message));
         socket.send(JSON.stringify(message));
         renderAnswer(myText.value.toString(), localStorage.getItem("currentUserId"));
+        btn.removeEventListener("click", sendAnswer);
     };
 
     btn.addEventListener("click", sendAnswer);
@@ -223,7 +227,6 @@ function handleReviewClick(event){
     }
 
     evaluatorDiv.remove();
-
     let message = {
         "action": "qualify",
         "userid": parseInt(answerDiv.getAttribute("userid")),
@@ -232,44 +235,159 @@ function handleReviewClick(event){
     console.log(socket);
     console.log(JSON.stringify(message));
     socket.send(JSON.stringify(message));
+    var lastEvaluator = document.getElementsByClassName("evaluator");
+
+    if (lastEvaluator.length == 0) {
+        startStepTimer(4, countDownInterval);
+    }
 }
 
-export function renderEvaluation(prevListener){
+export function renderEvaluation(prevListener, previousInterval) {
     var btn = document.getElementById("btnsendaq");
+    countDownInterval = previousInterval;
     btn.removeEventListener("click", prevListener);
 
     var aContainer = document.getElementsByClassName("answer-container");
     Array.from(aContainer).forEach(function(element) {
-        var div = document.createElement("div");
-        div.classList.add("evaluator");
+        if (element.getElementsByClassName("answer")[0].getAttribute("userid").toString() != localStorage.getItem("pregunton").toString()) {
+            var div = document.createElement("div");
+            div.classList.add("evaluator");
 
-        var btnOne = document.createElement("button");
-        var btnTwo = document.createElement("button");
-        var btnThree = document.createElement("button");
+            var btnOne = document.createElement("button");
+            var btnTwo = document.createElement("button");
+            var btnThree = document.createElement("button");
 
-        btnOne.classList.add("bad");
-        btnTwo.classList.add("good");
-        btnThree.classList.add("perfect");
+            btnOne.classList.add("bad");
+            btnTwo.classList.add("good");
+            btnThree.classList.add("perfect");
 
-        btnOne.textContent = "Mala 😫";
-        btnTwo.textContent = "Mas o Menos 😀";
-        btnThree.textContent = "Buena 🤩";
+            btnOne.textContent = "Mala 😫";
+            btnTwo.textContent = "Mas o Menos 😀";
+            btnThree.textContent = "Buena 🤩";
 
-        btnOne.value = "0";
-        btnTwo.value = "1";
-        btnThree.value = "2";
+            btnOne.value = "0";
+            btnTwo.value = "1";
+            btnThree.value = "2";
 
-        btnOne.addEventListener("click", handleReviewClick);
-        btnTwo.addEventListener("click", handleReviewClick);
-        btnThree.addEventListener("click", handleReviewClick);
+            btnOne.addEventListener("click", handleReviewClick);
+            btnTwo.addEventListener("click", handleReviewClick);
+            btnThree.addEventListener("click", handleReviewClick);
 
-        div.appendChild(btnOne);
-        div.appendChild(btnTwo);
-        div.appendChild(btnThree);
+            div.appendChild(btnOne);
+            div.appendChild(btnTwo);
+            div.appendChild(btnThree);
 
-        element.appendChild(div);
-    
+            element.appendChild(div);
+        }
     });
 
     return handleReviewClick;
+}
+
+
+function handleEvaluatorClick(event) {
+    const response = event.target.classList.contains('bad') ? "false" : "true";
+
+    const message = {
+        "action": "assess",
+        "correctness": response
+    };
+
+    console.log(socket);
+    console.log(JSON.stringify(message));
+    socket.send(JSON.stringify(message));
+
+    const evaluatorDiv = event.target.parentNode;
+    evaluatorDiv.parentNode.removeChild(evaluatorDiv);
+}
+
+
+export function renderReview(answer, grade) {
+    const answerDiv = document.createElement('div');
+    answerDiv.classList.add('answer');
+    answerDiv.innerText = answer;
+  
+    const evaluatorDiv = document.createElement('div');
+    evaluatorDiv.classList.add('evaluator');
+  
+    const badButton = document.createElement('button');
+    badButton.classList.add('bad');
+    badButton.innerText = 'Mala 😫';
+    badButton.addEventListener('click', handleEvaluatorClick);
+    evaluatorDiv.appendChild(badButton);
+  
+    const perfectButton = document.createElement('button');
+    perfectButton.classList.add('perfect');
+    perfectButton.innerText = 'Buena 🤩';
+    perfectButton.addEventListener('click', handleEvaluatorClick);
+    evaluatorDiv.appendChild(perfectButton);
+  
+    const ratingSpan = document.createElement('span');
+    ratingSpan.classList.add('rating');
+    let ratingEmoji;
+    if (grade == 0) {
+      ratingEmoji = '😫';
+    } else if (grade == 1) {
+      ratingEmoji = '😀';
+    } else if (grade == 2) {
+      ratingEmoji = '🤩';
+    }
+    ratingSpan.innerText = ratingEmoji;
+  
+    const showRatingZone = document.createElement('div');
+    showRatingZone.classList.add('showrating-zone');
+    showRatingZone.appendChild(document.createTextNode('Evaluación: '));
+    showRatingZone.appendChild(ratingSpan);
+    
+    
+    
+    answerDiv.appendChild(showRatingZone);
+    const answerContainer = document.createElement('div');
+    answerContainer.classList.add('answer-container');
+    answerContainer.appendChild(answerDiv);
+    answerContainer.appendChild(evaluatorDiv);
+  
+    const questionAnswerZone = document.getElementsByClassName('question-answer-zone')[0];
+    questionAnswerZone.appendChild(answerContainer);
+  }
+
+export function addPlayerScores(game_scores) {
+    const players = JSON.parse(localStorage.getItem("players"));
+    const container = document.getElementsByClassName("players-tags-container")[1];
+    container.innerHTML = '';
+
+    for (const userId in game_scores) {
+        const score = game_scores[userId];
+        const player = players.find(p => p.userid == userId);
+
+        if (player) {
+            const tag = document.createElement("div");
+            tag.classList.add("flex-row", "player-tag", "player");
+
+            const left = document.createElement("div");
+            left.classList.add("left");
+            const icon = document.createElement("img");
+            icon.classList.add("icon");
+            icon.setAttribute("src", "css/player.svg");
+            const username = document.createElement("span");
+            username.innerText = player.username;
+            left.appendChild(icon);
+            left.appendChild(username);
+            tag.appendChild(left);
+
+            const right = document.createElement("div");
+            right.classList.add("right");
+            const scoreDisplay = document.createElement("div");
+            scoreDisplay.innerText = score;
+            right.appendChild(scoreDisplay);
+            tag.appendChild(right);
+
+            container.appendChild(tag);
+        }
+    }
+}
+
+export function clearQuestionAnswers() {
+    const questionAnswerZone = document.getElementsByClassName('question-answer-zone')[0];
+    questionAnswerZone.innerHTML = '';
 }
