@@ -193,3 +193,45 @@ export function getAnswer(prevListener) {
 
     return sendAnswer;
 }
+
+function handleReviewClick(event){
+    if ( event.target) {
+    }
+}
+
+export function Evaluation(prevListener){
+    var btn = document.getElementById("btnsendaq");
+    btn.removeEventListener("click", prevListener);
+
+    var aContainer = document.getElementsByClassName("answer-container");
+    Array.from(aContainer).forEach(function(element) {
+        var div = document.createElement("div");
+        div.classList.add("evaluator");
+
+        var btnOne = document.createElement("button");
+        var btnTwo = document.createElement("button");
+        var btnThree = document.createElement("button");
+
+        btnOne.classList.add("bad");
+        btnTwo.classList.add("good");
+        btnThree.classList.add("perfect");
+
+        btnOne.textContent = "Mala 😫";
+        btnTwo.textContent = "Mas o Menos 😀";
+        btnThree.textContent = "Buena 🤩";
+
+        btnOne.value = "0";
+        btnTwo.value = "1";
+        btnThree.value = "2";
+
+        btnOne.addEventListener("click", handleReviewClick);
+        btnTwo.addEventListener("click", handleReviewClick);
+        btnThree.addEventListener("click", handleReviewClick);
+
+        div.appendChild(btnOne);
+        div.appendChild(btnTwo);
+        div.appendChild(btnThree);
+
+        element.appendChild(div);
+    });
+}
