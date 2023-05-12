@@ -1,4 +1,4 @@
-import { renderQuestion, renderPregunton, startStepTimer, renderAnswer, getQuestion,  getAnswer} from './controllers/mainController.js';
+import { renderQuestion, renderPregunton, renderEvaluation, startStepTimer, renderAnswer, getQuestion,  getAnswer} from './controllers/mainController.js';
 
 let value = localStorage.getItem("joinedGame");
 let token = localStorage.getItem("access");

@@ -29,12 +29,12 @@ export function renderAnswer(answerText, userid) {
         const questionAnswerZone = document.querySelector('.question-answer-zone');
         const answerContainer = document.createElement('div');
         answerContainer.classList.add('answer-container');
-        answerContainer.setAttribute('userid', userid);
         const answerElement = document.createElement('div');
         answerElement.classList.add('answer');
         answerElement.textContent = getUserName(userid) + ": " + answerText;
         answerContainer.appendChild(answerElement);
         questionAnswerZone.appendChild(answerContainer);
+        answerElement.setAttribute('userid', userid);
 
         const textArea = document.querySelector('#qtextarea');
         textArea.value = '';
@@ -226,7 +226,7 @@ function handleReviewClick(event){
 
     let message = {
         "action": "qualify",
-        "userid": answerDiv.getAtribute("userid").toString(),
+        "userid": answerDiv.getAttribute("userid").toString(),
         "grade ": event.target.value
     };
     console.log(socket);
@@ -270,6 +270,6 @@ export function renderEvaluation(prevListener){
         element.appendChild(div);
     
     });
-    
+
     return handleReviewClick;
 }
