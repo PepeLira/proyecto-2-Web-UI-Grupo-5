@@ -29,6 +29,7 @@ export function renderAnswer(answerText, userid) {
         const questionAnswerZone = document.querySelector('.question-answer-zone');
         const answerContainer = document.createElement('div');
         answerContainer.classList.add('answer-container');
+        answerContainer.setAttribute('userid', userid);
         const answerElement = document.createElement('div');
         answerElement.classList.add('answer');
         answerElement.textContent = getUserName(userid) + ": " + answerText;
@@ -195,8 +196,42 @@ export function getAnswer(prevListener) {
 }
 
 function handleReviewClick(event){
-    if ( event.target) {
+    // Find the answer div and rating span
+    const button = event.target;
+    const evaluatorDiv = button.parentNode;
+    const answerDiv = evaluatorDiv.parentNode.querySelector('.answer');
+    let ratingSpan = answerDiv.querySelector('.showrating-zone span:last-child');
+
+    // If the rating span doesn't exist, create it
+    if (!ratingSpan) {
+      ratingSpan = document.createElement('span');
+      ratingSpan.classList.add('rating');
+      const showRatingZone = document.createElement('div');
+      showRatingZone.classList.add('showrating-zone');
+      showRatingZone.appendChild(document.createTextNode('Evaluación: '));
+      showRatingZone.appendChild(ratingSpan);
+      answerDiv.appendChild(showRatingZone);
     }
+
+    // Update the rating span with the appropriate emoji
+    if (button.classList.contains('bad')) {
+      ratingSpan.innerText = '😫';
+    } else if (button.classList.contains('good')) {
+      ratingSpan.innerText = '😀';
+    } else if (button.classList.contains('perfect')) {
+      ratingSpan.innerText = '🤩';
+    }
+
+    evaluatorDiv.remove();
+
+    let message = {
+        "action": "qualify",
+        "userid": answerDiv.getAtribute("userid").toString(),
+        "grade ": event.target.value
+    };
+    console.log(socket);
+    console.log(JSON.stringify(message));
+    socket.send(JSON.stringify(message));
 }
 
 export function Evaluation(prevListener){
