@@ -87,6 +87,7 @@ if ( value !== null && token !== null) {
             localStorage.setItem("step", '3');
             localStorage.setItem("pregunton", info.nosy_id);
             countdownInterval = startStepTimer(3, countdownInterval);
+            sendBtnListener = renderEvaluation(sendBtnListener);
         }
         else if (info.type === 'qualify_timeout') {
             localStorage.setItem("step", '4');

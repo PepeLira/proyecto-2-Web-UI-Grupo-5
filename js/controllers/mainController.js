@@ -234,7 +234,7 @@ function handleReviewClick(event){
     socket.send(JSON.stringify(message));
 }
 
-export function Evaluation(prevListener){
+export function renderEvaluation(prevListener){
     var btn = document.getElementById("btnsendaq");
     btn.removeEventListener("click", prevListener);
 
@@ -268,5 +268,8 @@ export function Evaluation(prevListener){
         div.appendChild(btnThree);
 
         element.appendChild(div);
+    
     });
+    
+    return handleReviewClick;
 }
