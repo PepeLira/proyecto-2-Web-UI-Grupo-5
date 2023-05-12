@@ -96,6 +96,12 @@ if ( value !== null && token !== null) {
             localStorage.setItem("step", '1');
             localStorage.setItem("pregunton", info.nosy_id);
         }
+        else if (info.type === "round_review_answer") {
+            if ( localStorage.getItem("currentUserId") !== localStorage.getItem("pregunton")) {
+                countdownInterval = startStepTimer(4, countdownInterval);
+                //render qualify time for non pregunton users to send true or false to server
+            }
+        }
         else if (info.type === "game_result") {
             localStorage.setItem("started", "false");
             localStorage.setItem("step", '0');
